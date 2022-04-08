@@ -49,9 +49,7 @@ public class UserController {
     @RequestMapping("/finduser2")
     public MessReturn findUsername(@RequestBody User user){
 
-        /*@RequestBody JSONObject o
-          @RequestParameter("name") String name,@RequestParameter("sex") String sex //非json字符串接收方式 eg:get方式;post:form-data or application/x-www-form-urlencoded
-          @RequestBody UserIn user //定义一个实体类接收*/
+
 
 
         if(userService.finduser(user.getUsername())==null)
