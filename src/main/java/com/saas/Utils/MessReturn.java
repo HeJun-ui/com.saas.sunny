@@ -45,6 +45,10 @@ public class MessReturn {
     }
     public  MessReturn requsuccess(Object message)
     {
-        return new MessReturn(true,successcode,message);
+        return new MessReturn(teuesuccess,successcode,message);
+    }
+    public  MessReturn requfailed(Object message)
+    {
+        return new MessReturn(falsesuccess,failedcode,message);
     }
 }
