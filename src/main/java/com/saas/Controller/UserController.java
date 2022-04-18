@@ -1,13 +1,15 @@
+
 package com.saas.Controller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.saas.Ben.User;
 import com.saas.Service.imp.UserServiceImpl;
 import com.saas.Utils.MessReturn;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -35,7 +37,7 @@ public class UserController {
             } else {
                 return new MessReturn().requfailed("该用户名已经使用");
             }
-            return new MessReturn().requfailed("注册成功");
+            return new MessReturn().requsuccess("注册成功");
         } catch (Exception E) {
             E.printStackTrace();
             return new MessReturn().requfailed("失败");
@@ -51,23 +53,23 @@ public class UserController {
     @RequestMapping("/finduser")
     public MessReturn findUser(HttpServletRequest request) {
         //获取headers头部信息
-        String str = request.getHeader("Authorization");
+        String token = request.getHeader("Authorization");
         //验证token
-        if (str.equals("qqw1234")) {
-            List<User> userList = userService.findUser();
-            //以json格式返回所有用户信息
-            return new MessReturn().requsuccess(userList);
-        }
-        return new MessReturn().requfailed("login username or password invalid");
-    }
+        if (token != null) {
+            DecodedJWT chack = null;
+            try {
+                chack = JWT.require(Algorithm.HMAC256("12306")).build().verify(token);
+                List<User> userList = userService.findUser();
+                return new MessReturn().requsuccess(userList);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new MessReturn().requfailed("token无效");
 
-    @RequestMapping("/finduser2")
-    public MessReturn findUsername(@RequestBody User user) {
-        if (userService.finduser(user.getUsername()) == null) {
-            return new MessReturn().requsuccess("账号名称不存在");
-        } else {
-            return new MessReturn().requfailed("账号名称已经存在");
+            }
+            //以json格式返回所有用户信息
+
         }
+        return new MessReturn().requfailed("token不能为空");
     }
 
 }

@@ -67,7 +67,7 @@ public class User {
     }
 
 
-    //public int getIs_admin() {  return is_admin; }
+    public int getIs_admin() {  return is_admin; }
     /*public String getPassword() {
         return password;
     }*/
