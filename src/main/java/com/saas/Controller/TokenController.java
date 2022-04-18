@@ -48,6 +48,5 @@ public class TokenController {
 
         return new MessReturn().requfailed("账号密码不能为空");
 
-
     }
 }
