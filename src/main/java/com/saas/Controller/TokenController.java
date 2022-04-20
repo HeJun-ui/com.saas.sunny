@@ -47,8 +47,7 @@ public class TokenController {
                 return new ResponseUtil().requfailed("您不是管理员用户,没有权限查询");
             }
         }
-
-        return new ResponseUtil().requfailed("账号密码不能为空");
+                return new ResponseUtil().requfailed("账号密码不能为空");
 
     }
 }
