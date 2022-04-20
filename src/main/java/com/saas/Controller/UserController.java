@@ -1,16 +1,16 @@
 
 package com.saas.Controller;
-
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.saas.Ben.User;
 import com.saas.Service.imp.UserServiceImpl;
-import com.saas.Utils.MessReturn;
+import com.saas.Utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -28,19 +28,18 @@ public class UserController {
      * @return
      */
     @RequestMapping("/insert")
-    public MessReturn UserSave(String username, String password, char sex, int age, String name) {
+    public ResponseUtil UserSave(String username, String password, char sex, int age, String name) {
         try {
             if (userService.finduser(username) == null) {
                 User users = new User(sex, age, name, username, password);
                 userService.saveUser(users);
-
             } else {
-                return new MessReturn().requfailed("该用户名已经使用");
+                return new ResponseUtil().requfailed("该用户名已经使用");
             }
-            return new MessReturn().requsuccess("注册成功");
+                return new ResponseUtil().requsuccess("注册成功");
         } catch (Exception E) {
             E.printStackTrace();
-            return new MessReturn().requfailed("失败");
+                return new ResponseUtil().requfailed("失败");
         }
 
     }
@@ -51,7 +50,8 @@ public class UserController {
      * @return
      */
     @RequestMapping("/finduser")
-    public MessReturn findUser(HttpServletRequest request) {
+    public ResponseUtil findUser(HttpServletRequest request, HttpServletResponse response) {
+
         //获取headers头部信息
         String token = request.getHeader("Authorization");
         //验证token
@@ -60,16 +60,14 @@ public class UserController {
             try {
                 chack = JWT.require(Algorithm.HMAC256("12306")).build().verify(token);
                 List<User> userList = userService.findUser();
-                return new MessReturn().requsuccess(userList);
+                return new ResponseUtil().requsuccess(userList);
             } catch (Exception e) {
                 e.printStackTrace();
-                return new MessReturn().requfailed("token无效");
-
+                return new ResponseUtil().requfailed("token无效");
             }
             //以json格式返回所有用户信息
-
-        }
-        return new MessReturn().requfailed("token不能为空");
+             }
+                return new ResponseUtil().requfailed("token不能为空");
     }
 
 }

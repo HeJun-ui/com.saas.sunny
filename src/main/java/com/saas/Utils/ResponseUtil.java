@@ -1,6 +1,11 @@
 package com.saas.Utils;
 
-public class MessReturn {
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletResponse;
+
+public class ResponseUtil {
     private final static int successcode =200;
     private final static int failedcode =409;
 
@@ -38,21 +43,24 @@ public class MessReturn {
         this.message = message;
     }
 
-    public MessReturn() {
+    public ResponseUtil() {
     }
 
-    public MessReturn(boolean status,int code,Object message) {
+    public ResponseUtil(boolean status, int code, Object message) {
         this.status=status;
         this.code=code;
         this.message=message;
     }
-    public  MessReturn requsuccess(Object message)
+    public ResponseUtil requsuccess(Object message)
     {
-        return new MessReturn(teuesuccess,successcode,message);
+        return new ResponseUtil(teuesuccess,successcode,message);
     }
-    public  MessReturn requfailed(Object message)
+    public ResponseUtil requfailed(Object message)
 
     {
-        return new MessReturn(falsesuccess,failedcode,message);
+        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletResponse response = servletRequestAttributes.getResponse();
+        response.setStatus(409);
+        return new ResponseUtil(falsesuccess,failedcode,message);
     }
 }

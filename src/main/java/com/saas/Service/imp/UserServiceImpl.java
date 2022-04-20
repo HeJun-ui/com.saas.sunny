@@ -15,6 +15,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
     //新增用户
     public void saveUser(User user)
     {
@@ -41,11 +42,12 @@ public class UserServiceImpl implements UserService {
     }
 
     //生成Token
-    public String gettoken(String username, String password) {
+    public String getToken(String username, String password) {
         Date date=new Date(new Date().getTime()+60000*5);
         String token = JWT.create()
                 .withClaim("username", username)
                 .withClaim("password", password)
+                //设置token失效时间
                 .withExpiresAt(date)
                 //设置签名
                 .sign(Algorithm.HMAC256("12306"));
