@@ -28,9 +28,6 @@ public class User {
     @Column(name = "is_admin")
     private int is_admin;
 
-
-
-
     public void setIs_admin(int is_admin) { this.is_admin = is_admin; }
 
     public void setSex(char sex) {
@@ -65,7 +62,6 @@ public class User {
     public int getAge() {
         return age;
     }
-
 
     public int getIs_admin() {  return is_admin; }
     /*public String getPassword() {
