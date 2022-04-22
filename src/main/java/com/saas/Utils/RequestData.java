@@ -14,7 +14,7 @@ public class RequestData {
 
     @Test
     public void demo() {
-        String url = "https://pos-kec.kerry-ecommerce.com.cn/pos-web/shipment/create";
+        String url = null;
         String data = "{\"items\":[{\"currency\":\"THB\",\"description\":\"Two-piece business suit\",\"description_origin_language\":\"商务西装两件套\",\"quantity\":2,\"unit_price\":1090}],\"package\":{\"actual_weight\":1158,\"cod_value\":1690,\"cod_value_currency\":\"THB\",\"declared_value\":1690,\"declared_value_currency\":\"THB\",\"number_of_package\":1,\"payment_method\":\"COD\",\"reference_number\":\"TESTSUN20220419\",\"shipment_term\":\"DDP\",\"shipping_fee\":0},\"receiver\":{\"address\":\"ภูเก็ต เมืองภูเก็ต 101/574 ถนนประชาวามัคคี ตำบลรัษฎา\",\"city\":\"เมืองภูเก็ต\",\"company\":\"นายศิริพงษ์ เลื่อนฉวี\",\"country_code\":\"TH\",\"name\":\"นายศิริพงษ์ เลื่อนฉวี\",\"phone\":\"0994582626\"},\"sender\":{\"address\":\"Hong Kong Yueshao\",\"city\":\"Hong Kong\",\"company\":\"Hong Kong Yueshao\",\"country_code\":\"CN\",\"name\":\"mekmak\",\"phone\":\"13712374183\",\"post_code\":\"999077\"},\"service\":{\"channel_code\":\"CTCNTH100\"}}";
         JSONObject body = sendPost(url, data);
         System.out.println(body);
