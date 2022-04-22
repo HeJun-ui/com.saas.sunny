@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +28,7 @@ public class TokenController {
             if (user!=null&&user.getIs_admin()==2)
             {
                 //JWT生成token
-               String token= userService.getToken(username,password);
+                String token= userService.getToken(username,password);
                 Map message=new HashMap<>();
                 message.put("username",username);
                 message.put("token",token);
@@ -41,12 +39,13 @@ public class TokenController {
 
                 return new ResponseUtil().requfailed("账号或密码不正确");
 
-            }else if (user.getIs_admin()==0)
+            }else if (user.getIs_admin()!=2)
             {
 
                 return new ResponseUtil().requfailed("您不是管理员用户,没有权限查询");
             }
         }
+
                 return new ResponseUtil().requfailed("账号密码不能为空");
 
     }

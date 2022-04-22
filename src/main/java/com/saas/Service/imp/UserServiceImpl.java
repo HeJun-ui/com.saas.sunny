@@ -2,11 +2,10 @@ package com.saas.Service.imp;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.saas.Ben.User;
-import com.saas.Dao.UserRepository;
+import com.saas.Dao.UserDao;
 import com.saas.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.List;
 
@@ -14,31 +13,31 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserDao userDao;
 
     //新增用户
     public void saveUser(User user)
     {
-    userRepository.save(user);
+        userDao.save(user);
 
     }
     //根据username查询是否已有用户
     public User  finduser(String name)
     {
-        return  userRepository.findByUsername(name);
+        return  userDao.findByUsername(name);
     }
 
 
     //查询所有用户信息
     public List<User> findUser()
     {
-     return userRepository.findAll();
+     return userDao.findAll();
     }
 
     //校验账号是否正确
     public User account(String name,String password)
     {
-        return userRepository.findByUsernameAndPassword(name,password);
+        return userDao.findByUsernameAndPassword(name,password);
     }
 
     //生成Token

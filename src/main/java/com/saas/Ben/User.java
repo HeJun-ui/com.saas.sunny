@@ -64,17 +64,17 @@ public class User {
     }
 
     public int getIs_admin() {  return is_admin; }
-    /*public String getPassword() {
+    public String getPassword() {
         return password;
-    }*/
+    }
 
-    /*public void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     public int getId() {
         return id;
-    }*/
+    }
 
 
     public User() {
