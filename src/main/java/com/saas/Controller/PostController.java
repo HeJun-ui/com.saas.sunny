@@ -28,7 +28,6 @@ public class PostController {
     public String del()
     {
 
-        return "<h1>网站正在维护</h1>" +
-                "<";
+        return "<h1>网站正在维护</h1>";
     }
 }
