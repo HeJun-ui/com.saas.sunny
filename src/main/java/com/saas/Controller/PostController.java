@@ -1,12 +1,13 @@
 package com.saas.Controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.saas.Ben.Post;
 import com.saas.Service.imp.PostServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,15 +18,17 @@ public class PostController {
     @Autowired
     private PostServiceImpl postService;
 
-     @RequestMapping("/save")
-    public Map<Integer,String> SavePost(@RequestBody Post post,Map map)
+     @RequestMapping(value = "/save",method = RequestMethod.POST)
+    public JSONObject SavePost(@RequestBody Post post)
     {
-        map=new HashMap();
-       return postService.SavePost(post,map);
 
-
-
-
+       return postService.SavePost(post);
     }
+    @RequestMapping(value = "/del")
+    public String del()
+    {
 
+        return "<h1>网站正在维护</h1>" +
+                "<";
+    }
 }

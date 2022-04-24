@@ -19,10 +19,11 @@ public class TokenController {
 
     @RequestMapping("/get")
     public ResponseUtil GetToken(@RequestBody Map<String,String> map) {
-        String username=map.get("username");
-        String password=map.get("password");
-        if(username!=null&&password!=null)
-        {
+
+           String username=map.get("username");
+           String password=map.get("password");
+           if(username!=null&&password!=null)
+            {
             User user=userService.account(username,password);
                 //校验密码是否正确 是否为管理员用户
             if (user!=null&&user.getIs_admin()==2)
@@ -44,9 +45,10 @@ public class TokenController {
 
                 return new ResponseUtil().requfailed("您不是管理员用户,没有权限查询");
             }
-        }
+
+            }
 
                 return new ResponseUtil().requfailed("账号密码不能为空");
 
-    }
-}
+            }
+        }

@@ -14,8 +14,6 @@ public class Post {
     private String title;
     @Column(name = "description")
     private String description;
-    @Column(name = "comment")
-    private String comment;
     @Column(name = "user_id")
     private int user_id;
     @Column(name = "type")
@@ -31,10 +29,6 @@ public class Post {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 
     public void setUser_id(int user_id) {
@@ -55,10 +49,6 @@ public class Post {
 
     public String getDescription() {
         return description;
-    }
-
-    public String getComment() {
-        return comment;
     }
 
     public int getUser_id() {

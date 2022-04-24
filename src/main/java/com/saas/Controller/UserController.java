@@ -1,4 +1,3 @@
-
 package com.saas.Controller;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -52,10 +51,10 @@ public class UserController {
     @RequestMapping("/finduser")
     public ResponseUtil findUser(HttpServletRequest request, HttpServletResponse response) {
 
-        //获取headers头部信息
-        String token = request.getHeader("Authorization");
-        //验证token
-        if (token != null) {
+           //获取headers头部信息
+             String token = request.getHeader("Authorization");
+           //验证token
+            if (token != null) {
             DecodedJWT chack = null;
             try {
                 chack = JWT.require(Algorithm.HMAC256("12306")).build().verify(token);
@@ -66,8 +65,8 @@ public class UserController {
                 return new ResponseUtil().requfailed("token无效");
             }
             //以json格式返回所有用户信息
-             }
+            }
                 return new ResponseUtil().requfailed("token不能为空");
-    }
+            }
 
-}
+    }

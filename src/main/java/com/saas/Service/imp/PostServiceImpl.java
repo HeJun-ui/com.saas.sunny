@@ -1,12 +1,12 @@
 package com.saas.Service.imp;
 
+import com.alibaba.fastjson.JSONObject;
 import com.saas.Ben.Post;
 import com.saas.Dao.PostDao;
 import com.saas.Service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -27,18 +27,18 @@ public class PostServiceImpl implements PostService {
      * @param post
      * @return
      */
-    public Map<Integer,String> SavePost(Post post,Map map)
+    public JSONObject SavePost(Post post)
     {
-
+          JSONObject jsonObject=new JSONObject();
         try {
             postDao.save(post);
-            map.put(0,"success");
-           return  map;
+            jsonObject.put("message",200);
+           return  jsonObject;
         }catch(Exception e)
         {
-            map.put(1,"failed");
+            jsonObject.put("message",500);
             e.printStackTrace();
-            return  map;
+            return  jsonObject;
 
         }
     }
