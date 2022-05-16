@@ -3,7 +3,7 @@ package com.saas.Ben;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,19 @@ public class User {
     private char sex;
     //权限
     @Column(name = "is_admin")
+    //头像url
     private int is_admin;
+
+    public String getPicture_url() {
+        return picture_url;
+    }
+
+    public void setPicture_url(String picture_url) {
+        this.picture_url = picture_url;
+    }
+
+    @Column(name = "picture_url")
+    private String picture_url;
 
     public void setIs_admin(int is_admin) { this.is_admin = is_admin; }
 

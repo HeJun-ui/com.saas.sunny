@@ -34,11 +34,14 @@ public class UserServiceImpl implements UserService {
      return userDao.findAll();
     }
 
+
+
     //校验账号是否正确
     public User account(String name,String password)
     {
         return userDao.findByUsernameAndPassword(name,password);
     }
+
 
     //生成Token
     public String getToken(String username, String password) {
@@ -53,6 +56,12 @@ public class UserServiceImpl implements UserService {
 
         return token;
 
+    }
+
+    public int updateurl(String username,String path)
+    {
+
+        return userDao.updateByPricturl(username,path);
     }
 
 }

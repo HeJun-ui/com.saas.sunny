@@ -2,6 +2,9 @@ package com.saas.Utils;
 
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -10,17 +13,10 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+
 public class RequestData {
 
-    @Test
-    public void demo() {
-        String url = null;
-        String data = "{\"items\":[{\"currency\":\"THB\",\"description\":\"Two-piece business suit\",\"description_origin_language\":\"商务西装两件套\",\"quantity\":2,\"unit_price\":1090}],\"package\":{\"actual_weight\":1158,\"cod_value\":1690,\"cod_value_currency\":\"THB\",\"declared_value\":1690,\"declared_value_currency\":\"THB\",\"number_of_package\":1,\"payment_method\":\"COD\",\"reference_number\":\"TESTSUN20220419\",\"shipment_term\":\"DDP\",\"shipping_fee\":0},\"receiver\":{\"address\":\"ภูเก็ต เมืองภูเก็ต 101/574 ถนนประชาวามัคคี ตำบลรัษฎา\",\"city\":\"เมืองภูเก็ต\",\"company\":\"นายศิริพงษ์ เลื่อนฉวี\",\"country_code\":\"TH\",\"name\":\"นายศิริพงษ์ เลื่อนฉวี\",\"phone\":\"0994582626\"},\"sender\":{\"address\":\"Hong Kong Yueshao\",\"city\":\"Hong Kong\",\"company\":\"Hong Kong Yueshao\",\"country_code\":\"CN\",\"name\":\"mekmak\",\"phone\":\"13712374183\",\"post_code\":\"999077\"},\"service\":{\"channel_code\":\"CTCNTH100\"}}";
-        JSONObject body = sendPost(url, data);
-        System.out.println(body);
-    }
-
-    /**
+ /**
      * @param pathurl 请求地址
      * @param data    请求数据
      * @return
@@ -42,7 +38,7 @@ public class RequestData {
             conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("Content-Type", "application/json");
-            conn.setRequestProperty("Authorization","Bearer 325d78cd-492c-4839-993d-53a2d53f5ead");
+            conn.setRequestProperty("Authorization","Bearer { \"sysCode\": \"KEC\", \"sign\": \"29b2dca44308cff12e1a24adbd61ae9f242bbbf49e0d8f41b4848377aa630d07\"}");
             conn.connect();
             out = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
             out.write(data);

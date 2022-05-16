@@ -1,11 +1,11 @@
 package com.saas.Controller;
-
 import com.saas.Ben.User;
 import com.saas.Service.imp.UserServiceImpl;
 import com.saas.Utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +17,7 @@ public class TokenController {
     @Autowired
     private UserServiceImpl userService;
 
-    @RequestMapping("/get")
+    @RequestMapping(value = "/get",method = RequestMethod.POST)
     public ResponseUtil GetToken(@RequestBody Map<String,String> map) {
 
            String username=map.get("username");

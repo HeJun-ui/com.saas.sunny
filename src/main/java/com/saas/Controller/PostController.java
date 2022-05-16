@@ -1,5 +1,4 @@
 package com.saas.Controller;
-
 import com.alibaba.fastjson.JSONObject;
 import com.saas.Ben.Post;
 import com.saas.Service.imp.PostServiceImpl;
@@ -8,8 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/post")
