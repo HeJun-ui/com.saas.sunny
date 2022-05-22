@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>后台管理系统</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css"/>
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/login.js"></script>
+</head>
+<body>
+
+<div class="box">
+    <form action="http://localhost:8080/userlogin" method="post" onsubmit="return foLogin();">
+    <div id="tittle"><h2 align="center">登录</h2></div>
+    <p class="input_box">
+
+        账户： <input id="username" type="text" name="username" placeholder="请输入您的账户"/>
+    </p>
+    <p class="input_box">
+        密码： <input id="password" type="password" name="password" placeholder="请输入您的密码"/>
+    </p>
+
+    <div id="error_box" align="center" th:text="${errormessage}"><br/></div>
+        <br/>
+    <div class="button"><button  type="submit">登录</button></div>
+
+    <h6 align="center"> <a href="https://www.baidu.com">没有账号？注册</a></h6>
+        </form>
+    
+
+</div>
+</body>
+</html>

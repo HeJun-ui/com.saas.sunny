@@ -11,6 +11,7 @@ public interface UserDao extends JpaRepository<User,Integer> {
     User findByUsername(String name);
     User findByUsernameAndPassword(String name,String password);
 
+
     /**
      * 修改头像存储路径
      * @param username 用户名

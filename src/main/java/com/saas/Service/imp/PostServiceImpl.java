@@ -6,6 +6,8 @@ import com.saas.Dao.PostDao;
 import com.saas.Service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
@@ -22,11 +24,21 @@ public class PostServiceImpl implements PostService {
         return postDao.findAll();
     }
 
+
+    /**
+     * 查询文章信息
+     */
+    public Post findById(int id) {
+        return postDao.findById(id);
+
+    }
+
     /**
      * 保存发帖
      * @param post
      * @return
      */
+
     public JSONObject SavePost(Post post)
     {
           JSONObject jsonObject=new JSONObject();
@@ -42,4 +54,5 @@ public class PostServiceImpl implements PostService {
 
         }
     }
+
 }

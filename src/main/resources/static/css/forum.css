@@ -1,0 +1,22 @@
+body {
+    background-color: #e9ecef!important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.box
+{
+    border:1px solid #dddde5;float:left;height:700px;width:700px;margin-left:20%;
+    position: absolute;
+    top: 10px;
+    background-color:#FFFFFF;
+
+}
+a{
+    text-decoration: none;
+    font-size: 28px;
+}
+
+.text-body {
+}
+
