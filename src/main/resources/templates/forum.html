@@ -8,10 +8,7 @@
 <body>
 <div class="box">
 <a class="text-body" style="color: black" th:href="@{/findpost(id=${post.id})}" th:text="${post.title}"></a>
-
-
-    <time itemprop="dateCreated" th:datetime="${post.createtime}">时间</time>
-    <p th:text="${post.createtime}"/>
+    <span th:text="${post.createtime}"/>
     <p  th:text="${post.description}"/>
 
     <div align="center" th:each="remark,userStat:${listremark}">

@@ -5,8 +5,10 @@ import com.saas.Ben.Post;
 import com.saas.Dao.PostDao;
 import com.saas.Service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -53,6 +55,19 @@ public class PostServiceImpl implements PostService {
             return  jsonObject;
 
         }
+    }
+    public int countpost()
+    {
+       return (int) postDao.count();
+    }
+
+    public Page<Post> queryList(Integer page, Integer pageSize)
+    {
+
+        Pageable pageable=PageRequest.of(page,pageSize);
+
+        return postDao.findAll(pageable);
+
     }
 
 }

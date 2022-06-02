@@ -1,18 +1,23 @@
 package com.saas.Ben;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import javax.persistence.*;
-import javax.xml.crypto.Data;
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @EntityListeners(value = AuditingEntityListener.class)
 @Entity
 @Table(name = "post")
 public class Post {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -33,13 +38,17 @@ public class Post {
     @Column(name = "updatetime")
     private Date updatetime;
 
-    public Date getCreatetime() {
-        return createtime;
+
+    public String getCreatetime() {
+        //格式化Date对象
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy:MM:dd");
+        return sdf.format(createtime);
     }
 
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
+
 
     public Date getUpdatetime() {
         return updatetime;
@@ -48,8 +57,6 @@ public class Post {
     public void setUpdate_time(Date update_time) {
         this.updatetime = update_time;
     }
-
-
 
     public void setId(Integer id) {
         this.id = id;

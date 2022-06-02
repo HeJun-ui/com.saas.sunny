@@ -8,6 +8,10 @@ public interface PostService {
 
      List<Post> findAll();
 
-//    public Post findById(int id);
+     
+
+     public Post findById(int id);
+
+
 
 }
