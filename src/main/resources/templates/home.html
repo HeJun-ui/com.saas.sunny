@@ -41,12 +41,16 @@
         </li>
       </ul>
     </div>
+    <div style="float:right">
+    <span th:text="'总条数：'+${post.countnumber}+' 条 / 总页数：'+${post.countindex}+' 页'"></span>
+      <ul>
+        <li><a th:href="@{/paging(index=2)}">下一页</a></li>
+      </ul>
+  </div>
   </div>
 
 
-  <div style="float:right">
-    <span th:text="'总条数：'+${post.countnumber}+' 条 / 总页数：'+${post.totalPage}+' 页'"></span>
-  </div>
+
 <!--    <span th:text="'总条数：'+${pageBean.totalNum}+' 条 / 总页数：'+${pageBean.totalPage}+' 页'"></span>-->
 <!--    <br/>-->
 <!--    <ul class="pagination" th:with="currentPage=${pageBean.currentPage},totalPage=${pageBean.totalPage},link=${#httpServletRequest.requestURL}" >-->

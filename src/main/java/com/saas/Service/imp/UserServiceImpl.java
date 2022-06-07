@@ -64,4 +64,5 @@ public class UserServiceImpl implements UserService {
         return userDao.updateByPricturl(username,path);
     }
 
+
 }

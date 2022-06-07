@@ -21,6 +21,8 @@ public class PostController {
 
        return postService.SavePost(post);
     }
+
+
     @RequestMapping(value = "/del")
     public String del()
     {

@@ -36,18 +36,28 @@ public class LoginController {
             //List<Post> postList= postService.findAll();
             int number=postService.countpost();
 
-            Page<Post> page= postService.queryList(0,14);
-            PageInfo<Post> pageInfo=new PageInfo<Post>();
-            pageInfo.setIndex(1);
-            pageInfo.setNumber(5);
-            pageInfo.setList(page);
-            pageInfo.setCountnumber(number);
-
+            PageInfo<Post> pageInfo= postService.queryList(0,10,10);
             model.addAttribute("post",pageInfo);
             return "home";
         }
         model.addAttribute("errormessage","账号密码错误");
         return "login";
+    }
+
+    /**
+     * 分页接口实现
+     * @param index
+     * @param model
+     * @return
+     */
+    @RequestMapping(value ="/paging")
+    public  String  paging(Integer index,Model model)
+    {
+         index--;
+        PageInfo<Post> pageInfo= postService.queryList(index,10,10);
+
+        model.addAttribute("post",pageInfo);
+        return  "home";
     }
 
 

@@ -1,6 +1,7 @@
 package com.saas.Service.imp;
 
 import com.alibaba.fastjson.JSONObject;
+import com.saas.Ben.PageInfo;
 import com.saas.Ben.Post;
 import com.saas.Dao.PostDao;
 import com.saas.Service.PostService;
@@ -61,13 +62,19 @@ public class PostServiceImpl implements PostService {
        return (int) postDao.count();
     }
 
-    public Page<Post> queryList(Integer page, Integer pageSize)
+    public PageInfo<Post> queryList(Integer page, Integer pageSize,Integer number)
     {
-
+        PageInfo<Post> pageInfo=new PageInfo<>();
         Pageable pageable=PageRequest.of(page,pageSize);
+        Page<Post> postPage =postDao.findAll(pageable);
+        pageInfo.setList(postPage);
+        pageInfo.setCountnumber((int)postDao.count());
+        pageInfo.setNumber(number);
 
-        return postDao.findAll(pageable);
+
+        return pageInfo;
 
     }
+
 
 }

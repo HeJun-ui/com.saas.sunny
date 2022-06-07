@@ -1,5 +1,6 @@
 package com.saas.Utils;
 
+import com.saas.Ben.PageInfo;
 import com.saas.Ben.Post;
 import com.saas.Ben.Remark;
 import com.saas.Service.imp.PostServiceImpl;
@@ -45,12 +46,18 @@ public class TestDeam {
     @Test
     public void TestDeam2()
     {
-      Page<Post> postPage=  postService.queryList(0,3);
-        for (Post p : postPage) {
-            System.out.println(p.getTitle());
-        }
+        Integer page=2;
 
-        postService.findAll();
+        PageInfo<Post> pageInfo= postService.queryList(1,10,10);
+        for (Post p : pageInfo.getList()) {
+            System.out.println(p.getTitle()+ "11111111111111111111");
+        };
+//      Page<Post> postPage=  postService.queryList(0,3);
+//        for (Post p : postPage) {
+//            System.out.println(p.getTitle());
+//        }
+//
+//        postService.findAll();
 
     }
 }

@@ -33,6 +33,8 @@ public class PageInfo<T> {
     }
 
     public Integer getCountindex() {
+        this.countindex=this.countnumber%number==0?countnumber/number:countnumber/number+1;
+
         return countindex;
     }
 
@@ -89,8 +91,8 @@ public class PageInfo<T> {
     {
 
      this.number=number;
-     this.countindex=countindex;
-     this.countnumber=counttotal%number==0?counttotal/number:counttotal/number+1;
+     this.countnumber=countnumber;
+     this.countindex=counttotal%number==0?counttotal/number:counttotal/number+1;
      this.index=index;
 
 
