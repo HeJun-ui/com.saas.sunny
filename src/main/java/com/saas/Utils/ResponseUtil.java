@@ -12,8 +12,13 @@ public class ResponseUtil {
     private final static boolean teuesuccess =true;
     private final static boolean falsesuccess =false;
 
+    private boolean status;
+    private int code;
+    private Object message;
 
-
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
     public int getCode() {
         return code;
     }
@@ -25,16 +30,6 @@ public class ResponseUtil {
     public boolean isStatus() {
         return status;
     }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    private boolean status;
-    private int code;
-    private Object message;
-
-
     public void setCode(int code) {
         this.code = code;
     }
@@ -55,6 +50,7 @@ public class ResponseUtil {
     {
         return new ResponseUtil(teuesuccess,successcode,message);
     }
+
     public ResponseUtil requfailed(Object message)
 
     {

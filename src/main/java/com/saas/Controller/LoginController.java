@@ -36,7 +36,7 @@ public class LoginController {
             //List<Post> postList= postService.findAll();
             int number=postService.countpost();
 
-            PageInfo<Post> pageInfo= postService.queryList(0,10,10);
+            PageInfo<Post> pageInfo= postService.queryList(0,8);
             model.addAttribute("post",pageInfo);
             return "home";
         }
@@ -53,11 +53,11 @@ public class LoginController {
     @RequestMapping(value ="/paging")
     public  String  paging(Integer index,Model model)
     {
-         index--;
-        PageInfo<Post> pageInfo= postService.queryList(index,10,10);
-
+        int page=index;
+        PageInfo<Post> pageInfo= postService.queryList(--index,8);
+        pageInfo.setIndex(page);
         model.addAttribute("post",pageInfo);
-        return  "home";
+        return  "home::fragmentSegment";
     }
 
 

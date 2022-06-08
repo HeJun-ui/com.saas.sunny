@@ -2,20 +2,24 @@ package com.saas.Ben;
 
 import org.springframework.data.domain.Page;
 
-import java.util.List;
-
 public class PageInfo<T> {
 
-    private Integer index; //当前页
+    private Integer index=1; //当前页
+    private Integer number; //每页显示条数
+    private Integer countnumber; //总数
 
-    public Integer getIndex() {
-        return index;
-    }
+    private Integer countindex;//总页数 通过计算 总数和显示条数得来
+
+    private Page<T> list;
+
+
 
     public void setIndex(Integer index) {
         this.index = index;
     }
-
+    public Integer getIndex() {
+        return index;
+    }
     public Integer getNumber() {
         return number;
     }
@@ -42,29 +46,9 @@ public class PageInfo<T> {
         this.countindex = countindex;
     }
 
-    public Integer getStartindex() {
-        return startindex;
-    }
 
-    public void setStartindex(Integer startindex) {
-        this.startindex = startindex;
-    }
 
-    public Integer getStart() {
-        return start;
-    }
 
-    public void setStart(Integer start) {
-        this.start = start;
-    }
-
-    public Integer getEnd() {
-        return end;
-    }
-
-    public void setEnd(Integer end) {
-        this.end = end;
-    }
 
     public Page<T> getList() {
         return list;
@@ -74,18 +58,12 @@ public class PageInfo<T> {
         this.list = list;
     }
 
-    private Integer number; //每页显示条数
-    private Integer countnumber; //总数
-
-    private Integer countindex;//总页数 通过计算得来
-    private Integer startindex;//索引
-
-    private Integer start;//起始页
-    private Integer end;//结束页数
-
-    private Page<T> list;
 
 
+    public  PageInfo()
+    {
+
+    }
 
     public PageInfo(Integer index,Integer number,Integer counttotal)
     {
@@ -98,10 +76,7 @@ public class PageInfo<T> {
 
 
     }
-    public  PageInfo()
-    {
 
-    }
 
 }
 

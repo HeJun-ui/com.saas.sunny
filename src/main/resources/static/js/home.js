@@ -57,9 +57,17 @@ function showhide() {
     }
 
 }
-function paging(index)
-{
-    alert(index);
 
+function page(a)
+{
+    $.ajax({
+        url:"/paging",
+        data:"index="+a,
+        type:"GET",
+        cache: false,
+        success:function(result){
+            $("#box_page").html(result);
+        }
+    });
 
 }

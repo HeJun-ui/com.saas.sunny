@@ -48,7 +48,7 @@ public class TestDeam {
     {
         Integer page=2;
 
-        PageInfo<Post> pageInfo= postService.queryList(1,10,10);
+        PageInfo<Post> pageInfo= postService.queryList(1,8);
         for (Post p : pageInfo.getList()) {
             System.out.println(p.getTitle()+ "11111111111111111111");
         };

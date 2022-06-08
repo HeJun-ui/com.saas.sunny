@@ -21,13 +21,10 @@
     <br/>
   </form>
 
-     小破站
-
-
-
   </div>
   <div class="fen">
-    <div id="box_text" >
+    <div id="box_page" th:fragment="fragmentSegment">
+    <div id="box_text">
       <ul>
         <li  th:each="post,userStat:${post.list}">
           <div class="number">
@@ -41,34 +38,20 @@
         </li>
       </ul>
     </div>
-    <div style="float:right">
+    <div style="float:right" >
     <span th:text="'总条数：'+${post.countnumber}+' 条 / 总页数：'+${post.countindex}+' 页'"></span>
-      <ul>
-        <li><a th:href="@{/paging(index=2)}">下一页</a></li>
+      <span th:text="当前第+${post.index}+页"></span>
+      <ul class="box_page">
+
+        <li th:if="${post.index!=1}"><span th:onclick="page(1)">首页</span></li>
+        <li th:if="${post.index>1}"><span th:onclick="page([[${post.index}-1]])">上一页</span></li>
+        <li th:if="${post.index<post.countindex}"><span th:onclick="page([[${post.index}+1]])">下一页</span></li>
       </ul>
   </div>
+    </div>
   </div>
 
 
-
-<!--    <span th:text="'总条数：'+${pageBean.totalNum}+' 条 / 总页数：'+${pageBean.totalPage}+' 页'"></span>-->
-<!--    <br/>-->
-<!--    <ul class="pagination" th:with="currentPage=${pageBean.currentPage},totalPage=${pageBean.totalPage},link=${#httpServletRequest.requestURL}" >-->
-<!--      <li><a th:href="@{${link}}">首页</a></li>-->
-<!--      <li><a th:href="@{${link}(currentPage=${currentPage>1?currentPage-1:1})}">&laquo;</a></li>-->
-<!--      <li th:if="${currentPage-2>0}"><a th:href="@{${link}(currentPage=${currentPage-2})}" th:text="${currentPage-2}"></a></li>-->
-<!--      <li th:if="${currentPage-1>0}"><a th:href="@{${link}(currentPage=${currentPage-1})}" th:text="${currentPage-1}"></a></li>-->
-<!--      <li th:class="active"><a th:href="@{${link}(currentPage=${currentPage}}" th:text="${currentPage}"></a></li>-->
-<!--      <li th:if="${currentPage+1<=totalPage}"><a th:href="@{${link}(currentPage=${currentPage}+1)}" th:text="${currentPage}+1"></a></li>-->
-<!--      <li th:if="${currentPage+2<=totalPage}"><a th:href="@{${link}(currentPage=${currentPage}+2)}" th:text="${currentPage}+2"></a></li>-->
-<!--      <li><a th:href="@{${link}(currentPage=${currentPage+1<=totalPage?currentPage+1:totalPage})}">&raquo;</a></li>-->
-<!--      <li><a th:href="@{${link}(currentPage=${totalPage})}">尾页</a></li>-->
-<!--    </ul>-->
-<!--  </div>-->
-<!--  <ul class="ul_box">-->
-<!--    <li class="li_box"><div class="p-3 d-flex flex-column flex-md-row my-warning"><div class="d-flex flex-sm-shrink-1 mb-2 mb-md-0"><div class="num-card text-secondary py-1 me-3 me-md-2  "><span class="font-size-16 me-1 me-sm-0">0</span><span class="font-size-14">回答</span></div><div class="num-card text-secondary py-1 me-3-->
-<!--             "><span class="font-size-16">5</span><span class="d-block d-sm-none" style="width:4px"></span><span class="font-size-14">阅读</span></div></div><div class="w-100"><h6 class="q-item-title" style="margin-bottom:12px"><a href="/q/1010000041921444" class="text-body" target="">如何进行代理用户名密码的安全加密</a></h6><div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between"><div class="d-flex flex-wrap align-items-center"><div class="d-flex flex-wrap align-items-center me-3"><div class="m-n1 d-flex flex-wrap align-items-center"><a href="/t/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86" class="m-1 badge-tag  ">加密解密</a><a href="/t/%E5%90%8E%E7%AB%AF" class="m-1 badge-tag  ">后端</a></div></div></div><div class="user-info font-size-14"><a href="/u/biehuitou">别回头</a><span class="split-dot"></span><a href="/q/1010000041921444" class="text-secondary" target="">1 分钟前提问</a></div></div></div></div></li>-->
-<!--    </ul>-->
 
 
 
