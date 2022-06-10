@@ -28,7 +28,6 @@ function uploadfile() {
             contentType:false,
             dataType:"json",
              success:function(res) {
-
                 if(res.message=='ok')
                  {
                      $('.showPic').attr('src',res.url);
@@ -50,7 +49,7 @@ function uploadfile() {
 function showhide() {
     if (document.getElementById("load").style.display=="none"){
 
-        document.getElementById("load").style.display="block";
+        document.getElementById("load").style.display="";
     }else
     {
         document.getElementById("load").style.display="none";

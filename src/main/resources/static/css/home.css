@@ -5,10 +5,7 @@
     float: left;
     margin-left:10px
 }
-#uname
-{
-    right:30px
-}
+
 .fen
 {
     border-left:1px solid #dddde5;float:left;height:700px;width:1000px;margin-left:280px;
@@ -20,6 +17,11 @@
 a{
     text-decoration: none;
 
+}
+#uname{
+    position:relative;
+    left:30px;
+    top:40px;
 }
 
 #box_text
@@ -47,33 +49,26 @@ a{
 
 #load {
 
-
-
-    font-family: var(--bs-body-font-family);
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    -webkit-font-smoothing: antialiased;
-    --bs-gutter-x: 24px;
-    --bs-gutter-y: 0;
-    word-wrap: break-word;
     box-sizing: border-box;
-    display: inline-block;
-    font-weight: 400;
-    line-height: 1.5;
-    text-align: center;
-    text-decoration: none;
-    vertical-align: middle;
+    line-height: 20px;
+    position:absolute;
     cursor: pointer;
-    user-select: none;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    padding: .25rem .5rem;
-    border-radius: .2rem;
-    margin-bottom: .5rem!important;
-    font-size: .875rem!important;
-    color: #fff;
-    background-color: #6c757d;
-    border-color: #6c757d;
+    color: #888;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    *zoom: 1;
+    top: 80px;
+    left: 145px;
 }
+#load:hover{
+    color: #444;
+    background: #eee;
+    border-color: #ccc;
+    text-decoration: none;
+}
+
 ul
 {
     padding-left:0px;
@@ -83,17 +78,12 @@ ul
 }
 #box_text li
 {
-
-    /*position: relative;*/
     display: block;
     padding: 0.5rem 1rem;
     color: #212529;
     text-decoration: none;
     background-color: #fff;
     border: 1px solid rgba(0,0,0,.0625);
-
-
-
 }
 .number
 {
@@ -202,6 +192,13 @@ ul
     display: block;
     padding: 0.5rem 1rem;
     color: #212529;
+    text-decoration: none;
+
+}
+.box_page li:hover
+{
+
+    color: #0d6efd;
     text-decoration: none;
 
 }

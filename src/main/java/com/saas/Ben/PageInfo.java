@@ -10,6 +10,27 @@ public class PageInfo<T> {
 
     private Integer countindex;//总页数 通过计算 总数和显示条数得来
 
+    public Integer getStartindex() {
+        this.startindex=index;
+        return startindex;
+    }
+
+    public void setStartindex(Integer startindex) {
+        this.startindex = startindex;
+    }
+
+    public Integer getEndindex() {
+        this.endindex=countindex;
+        return endindex;
+    }
+
+    public void setEndindex(Integer endindex) {
+        this.endindex = endindex;
+    }
+
+    private Integer startindex;
+    private Integer endindex;
+
     private Page<T> list;
 
 
@@ -65,13 +86,10 @@ public class PageInfo<T> {
 
     }
 
-    public PageInfo(Integer index,Integer number,Integer counttotal)
+    public PageInfo(Integer index,Integer number,Integer countnumber,Integer countindex,Page<T> list)
     {
 
-     this.number=number;
-     this.countnumber=countnumber;
-     this.countindex=counttotal%number==0?counttotal/number:counttotal/number+1;
-     this.index=index;
+
 
 
 
