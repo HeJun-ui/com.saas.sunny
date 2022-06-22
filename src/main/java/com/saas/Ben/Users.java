@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -40,7 +40,9 @@ public class User {
     @Column(name = "picture_url")
     private String picture_url;
 
-    public void setIs_admin(int is_admin) { this.is_admin = is_admin; }
+    public void setIs_admin(int is_admin) {
+        this.is_admin = is_admin;
+    }
 
     public void setSex(char sex) {
         this.sex = sex;
@@ -58,7 +60,10 @@ public class User {
         this.username = username;
     }
 
-    public void setPassword(String password) { this.password = password; }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -75,7 +80,10 @@ public class User {
         return age;
     }
 
-    public int getIs_admin() {  return is_admin; }
+    public int getIs_admin() {
+        return is_admin;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -89,11 +97,11 @@ public class User {
     }
 
 
-    public User() {
+    public Users() {
 
     }
 
-    public User(char sex, int age, String name, String username, String password) {
+    public Users(char sex, int age, String name, String username, String password) {
         this.username = username;
         this.password = password;
         this.sex = sex;

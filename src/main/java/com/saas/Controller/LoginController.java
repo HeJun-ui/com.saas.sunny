@@ -1,14 +1,21 @@
 package com.saas.Controller;
+import com.alibaba.fastjson.JSONObject;
 import com.saas.Ben.PageInfo;
 import com.saas.Ben.Post;
-import com.saas.Ben.User;
+import com.saas.Ben.Users;
 import com.saas.Service.imp.PostServiceImpl;
 import com.saas.Service.imp.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
@@ -18,30 +25,13 @@ public class LoginController {
     @Autowired
     PostServiceImpl postService;
 
-    @RequestMapping(value = "/login")
-    public  String login()
+    @RequestMapping(value = "/home")
+    public  String login(Model model, HttpServletRequest req)
     {
-        return "login";
-    }
+        PageInfo<Post> pageInfo= postService.queryList(0,8);
+        model.addAttribute("post",pageInfo);
+        return "home";
 
-
-    @RequestMapping(value ="/userlogin")
-     public  String userlogin(String username,String password,Model model)
-    {
-
-        User user=userService.account(username,password);
-        if (user!=null){
-            model.addAttribute("filename",user.getPicture_url());
-            model.addAttribute("name",user.getUsername());
-            //List<Post> postList= postService.findAll();
-            int number=postService.countpost();
-
-            PageInfo<Post> pageInfo= postService.queryList(0,8);
-            model.addAttribute("post",pageInfo);
-            return "home";
-        }
-        model.addAttribute("errormessage","账号密码错误");
-        return "login";
     }
 
     /**

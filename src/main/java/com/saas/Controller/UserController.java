@@ -1,26 +1,36 @@
 package com.saas.Controller;
+
 import com.alibaba.fastjson.JSONObject;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.saas.Ben.User;
+import com.saas.Ben.Users;
 import com.saas.Service.imp.UserServiceImpl;
 import com.saas.Utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserServiceImpl userService;
-     /**
+
+    /**
      * 用户注册新增用户
      *
      * @param username
@@ -31,7 +41,7 @@ public class UserController {
     public ResponseUtil UserSave(String username, String password, char sex, int age, String name) {
         try {
             if (userService.finduser(username) == null) {
-                User users = new User(sex, age, name, username, password);
+                Users users = new Users(sex, age, name, username, password);
                 userService.saveUser(users);
             } else {
                 return new ResponseUtil().requfailed("该用户名已经使用");
@@ -41,7 +51,35 @@ public class UserController {
             E.printStackTrace();
             return new ResponseUtil().requfailed("失败");
         }
- }
+    }
+
+
+
+    @RequestMapping(value = "/login")
+    public JSONObject userlogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest req) {
+        System.out.println("用户登录接口 数据已经进来了");
+        System.out.println("username:" + username + "  password:" + password);
+
+        Users users = userService.account(username, password);
+        if (users != null) {
+            System.out.println("账号密码正确");
+            HttpSession session = req.getSession();
+            session.setAttribute("user", users);
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("message","ok");
+            jsonObject.put("url",users.getPicture_url());
+            jsonObject.put("name",users.getUsername());
+            return jsonObject;
+        }
+
+        return JSONObject.parseObject("{'message':'false'}");
+    }
+
+
+
+
+
+
 
     /**
      * 管理员查询所有用户信息
@@ -57,8 +95,8 @@ public class UserController {
             DecodedJWT chack = null;
             try {
                 chack = JWT.require(Algorithm.HMAC256("12306")).build().verify(token);
-                List<User> userList = userService.findUser();
-                return new ResponseUtil().requsuccess(userList);
+                List<Users> usersList = userService.findUser();
+                return new ResponseUtil().requsuccess(usersList);
             } catch (Exception e) {
                 e.printStackTrace();
                 return new ResponseUtil().requfailed("token无效");
@@ -73,16 +111,16 @@ public class UserController {
     private String filePath;
     @Value("${file.url.prefix}")
     private String uploadPath;
+
     @RequestMapping("/upload")
-    public JSONObject upload(String username, MultipartFile file){
-        System.out.println("11111111");
+    public JSONObject upload(String username, MultipartFile file, HttpServletRequest req) {
+
         //判断文件是否为空,是否超过大小
-       if (file.isEmpty()) {
-        return JSONObject.parseObject("{'message':'false'}");
-       }else if (file.getSize()>2097152)
-       {
-           return JSONObject.parseObject("{'message':'图片太大,限制图片大小为2M'}");
-       }
+        if (file.isEmpty()) {
+            return JSONObject.parseObject("{'message':'false'}");
+        } else if (file.getSize() > 2097152) {
+            return JSONObject.parseObject("{'message':'图片太大,限制图片大小为2M'}");
+        }
         // 获取上传文件名
         String filename = file.getOriginalFilename();
         // 新建文件
@@ -98,14 +136,19 @@ public class UserController {
             userService.updateurl(username, uploadPath + filename);
             object.put("message", "ok");
             object.put("url", uploadPath + filename);
-          }catch(Exception ex)
-          {
-             ex.printStackTrace();
+            //更新在线用户的头像
+            HttpSession session = req.getSession();
+            Users users = (Users) session.getAttribute("user");
+            users.setPicture_url(uploadPath + filename);
+            session.setAttribute("user", users);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
             object.put("message", "系统错误");
             System.out.println("进入异常");
-          return JSONObject.parseObject("{'message':'false'}");
-          }
+            return JSONObject.parseObject("{'message':'false'}");
+        }
 
-          return object;
-          }
+        return object;
+    }
 }

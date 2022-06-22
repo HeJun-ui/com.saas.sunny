@@ -1,7 +1,7 @@
 package com.saas.Service.imp;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.saas.Ben.User;
+import com.saas.Ben.Users;
 import com.saas.Dao.UserDao;
 import com.saas.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +16,20 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     //新增用户
-    public void saveUser(User user)
+    public void saveUser(Users users)
     {
-        userDao.save(user);
+        userDao.save(users);
 
     }
     //根据username查询是否已有用户
-    public User  finduser(String name)
+    public Users finduser(String name)
     {
         return  userDao.findByUsername(name);
     }
 
 
     //查询所有用户信息
-    public List<User> findUser()
+    public List<Users> findUser()
     {
      return userDao.findAll();
     }
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
 
     //校验账号是否正确
-    public User account(String name,String password)
+    public Users account(String name, String password)
     {
         return userDao.findByUsernameAndPassword(name,password);
     }

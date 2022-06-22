@@ -1,3 +1,80 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#show{
+    display: block;
+    width: 50px;
+    height: 15px;
+    background: #4E9CAF;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+
+}
+.login{
+    /*width: 300px;*/
+    /*height: 300px;*/
+    /*padding: 3px;*/
+    /*background: #abcdef;*/
+    /*display: none;*/
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    display: none;
+    z-index: 2;
+    border: 1px solid #d9e0d9;
+    height: 370px;
+    width: 500px;
+    left: 0;
+    right: 0;
+    position: absolute;
+    background: #fff;
+}
+.login h3{
+    /*width: 300px;*/
+    /*height: 30px;*/
+    font-family: '微软雅黑';
+    line-height: 30px;
+
+    background: #72fa90;
+}
+.login h3 span{
+    float: right;
+    margin-right: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.login h3 span:hover{
+    color:red;
+}
+.cont{
+
+    /*background: #fff;*/
+}
+.cont input{
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    align-self: center;
+    height: 30px;
+    width: 300px;
+}
+.mask{
+    background: #000;
+    opacity: .6;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    z-index: 1;
+}
+
+
+/**
+登录框
+ */
 h2 {
     font-family: 宋体;
     font-size: 28px;
@@ -8,11 +85,8 @@ h2 {
     height: 30px;
     width: 500px;
 }
-.box {
-    border: 1px solid #dddde5;
-    height: 370px;
-    width: 500px;
-    float: left;
+.box_login {
+   text-align: center;
 }
 
 .input_box{
@@ -23,20 +97,14 @@ h2 {
     width: 500px;
 
 }
-input {
-    align-self: center;
-    height: 30px;
-    width: 300px;
-}
-body
-{
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    left: 35%;top: 15%;
-}
+/*input_ {*/
+/*    align-self: center;*/
+/*    height: 30px;*/
+/*    width: 300px;*/
+/*}*/
 
-button{
+
+.button{
 
     font-size: 22px;
     width: 360px;

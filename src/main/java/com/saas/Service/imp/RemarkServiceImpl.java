@@ -1,4 +1,5 @@
 package com.saas.Service.imp;
+import com.saas.Ben.Content;
 import com.saas.Ben.Remark;
 import com.saas.Dao.RemarkDao;
 import com.saas.Service.RemarkService;
@@ -27,9 +28,10 @@ public class RemarkServiceImpl implements RemarkService {
         return remarkDao.findByPostid(id);
     }
 
-
-
-
+    @Override
+    public List<Content> findAllRemark(Integer postid) {
+        return remarkDao.queryContent(postid);
+    }
 
 
 }

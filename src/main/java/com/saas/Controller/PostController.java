@@ -1,4 +1,5 @@
 package com.saas.Controller;
+
 import com.alibaba.fastjson.JSONObject;
 import com.saas.Ben.Post;
 import com.saas.Service.imp.PostServiceImpl;
@@ -15,16 +16,14 @@ public class PostController {
     @Autowired
     private PostServiceImpl postService;
 
-     @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public JSONObject SavePost(@RequestBody Post post)
-    {
-       return postService.SavePost(post);
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public JSONObject SavePost(@RequestBody Post post) {
+        return postService.SavePost(post);
     }
 
 
     @RequestMapping(value = "/del")
-    public String del()
-    {
+    public String del() {
 
         return "<h1>网站正在维护</h1>";
     }

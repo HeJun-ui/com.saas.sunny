@@ -1,4 +1,6 @@
 package com.saas.Controller;
+
+import com.saas.Ben.Content;
 import com.saas.Ben.Post;
 import com.saas.Ben.Remark;
 import com.saas.Service.imp.PostServiceImpl;
@@ -13,23 +15,23 @@ import java.util.List;
 @Controller
 public class ForumController {
 
-     @Autowired
+    @Autowired
     PostServiceImpl postService;
     @Autowired
     RemarkServiceImpl remarkService;
 
-     @RequestMapping("/findpost")
-     public  String  findForum(int id,Model model)
-     {
-         //获取文章信息
-        Post post= postService.findById(id);
+    @RequestMapping("/findpost")
+    public String findForum(int id, Model model) {
+        //获取文章信息
+        Post post = postService.findById(id);
         //文章对应评论
-        List<Remark> remarkList=remarkService.findRemark(id);
-        model.addAttribute("post",post);
-        model.addAttribute("listremark",remarkList);
-         return "forum";
-     }
+        List<Content> contentList = remarkService.findAllRemark(id);
 
+
+        model.addAttribute("post", post);
+        model.addAttribute("contentList", contentList);
+        return "forum";
+    }
 
 
 }

@@ -8,13 +8,26 @@
 <body>
 <div class="box">
 <a class="text-body" style="color: black" th:href="@{/findpost(id=${post.id})}" th:text="${post.title}"></a>
-    <span th:text="${post.createtime}"/>
+    <span id="box_data" th:text="${post.createtime}"/>
     <p  th:text="${post.description}"/>
 
-    <div align="center" th:each="remark,userStat:${listremark}">
 
-        <a th:text="${remark.comment}"></a>
-    </div>
+</div>
+
+
+
+
+<div class="box_pex">
+   <div class="box_remark" th:each="content,userStat:${contentList}"  >
+       <ul>
+           <li>
+               <img style="border-radius:50%; overflow:hidden;" width="50" height="50" th:src="${content.picture_url}">
+               <span class="badge-tag" th:text="${content.name}"></span>
+               <span class="badge-tag" th:text="${content.comment}"></span>
+
+           </li>
+       </ul>
+   </div>
 
 </div>
 

@@ -8,13 +8,30 @@ public class Remark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private  Integer  id;
+    private Integer id;
     @Column(name = "comment")
-    private  String comment;
-    @Column(name = "user_id")
-    private int user_id;
+    private String comment;
+    @Column(name = "userid")
+    private int userid;
     @Column(name = "postid")
-    private  Integer  postid;
+    private Integer postid;
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public Integer getPostid() {
+        return postid;
+    }
+
+    public void setPostid(Integer postid) {
+        this.postid = postid;
+    }
+
 
     public void setId(Integer id) {
         this.id = id;
@@ -24,13 +41,6 @@ public class Remark {
         this.comment = comment;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
-    public void setPostid(int post_id) {
-        this.postid = post_id;
-    }
 
     public Integer getId() {
         return id;
@@ -40,13 +50,6 @@ public class Remark {
         return comment;
     }
 
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public int getPostid() {
-        return postid;
-    }
 
 }
 

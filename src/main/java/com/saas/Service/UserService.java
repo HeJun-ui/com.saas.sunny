@@ -1,15 +1,15 @@
 package com.saas.Service;
 
-import com.saas.Ben.User;
+import com.saas.Ben.Users;
 
 import java.util.List;
 
 public interface UserService {
 
-    public void saveUser(User user);
+    public void saveUser(Users users);
 
 
-    public List<User> findUser();
+    public List<Users> findUser();
 
 
 

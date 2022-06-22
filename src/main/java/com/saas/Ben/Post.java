@@ -1,7 +1,9 @@
 package com.saas.Ben;
+
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +23,7 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-     private int id;
+    private int id;
     @Column(name = "title")
     private String title;
     @Column(name = "description")
@@ -41,7 +43,7 @@ public class Post {
 
     public String getCreatetime() {
         //格式化Date对象
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy:MM:dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("发布于yyyy年MM月dd日");
         return sdf.format(createtime);
     }
 

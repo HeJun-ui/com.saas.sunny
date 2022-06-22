@@ -1,15 +1,15 @@
 package com.saas.Dao;
-import com.saas.Ben.User;
+import com.saas.Ben.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 
-public interface UserDao extends JpaRepository<User,Integer> {
+public interface UserDao extends JpaRepository<Users,Integer> {
 
-    User findByUsername(String name);
-    User findByUsernameAndPassword(String name,String password);
+    Users findByUsername(String name);
+    Users findByUsernameAndPassword(String name, String password);
 
 
     /**

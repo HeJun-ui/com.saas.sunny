@@ -1,75 +1,179 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 
-  <html lang="en">
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" type="text/css" href="../static/css/home.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css"/>
     <script src="../static/js/jquery.js"></script>
     <script src="../static/js/home.js"></script>
-  </head>
-  <body>
-  <div th:if="${user!=null}" style="width:280px;height: 500px;">
-  <div class="box" onclick="showhide();">
-    <img class="showPic" th:src="${{filename}}" alt="图片" width="100" height="100" />
-  </div>
-    <span  id="uname" th:text="${name}" ></span>
+    <script src="../static/js/login.js"></script>
+    <script>
+        $(function () {
+            var login = $('.login');
+            //动态获取文档高宽
+            var documentW = $(document).width();
+            var documentH = $(document).height();
 
-    <input type="button" id="load" value="修改头像" class="btn btn-success" onclick="upload()"/>
+            function getPos() {
+                //浏览器宽度
+                var bw = $(window).width();
+                //浏览器高度
+                var bh = $(window).height();
+                //获取纵向滚动条的高度
+                var scrollH = $(window).scrollTop();
+                //获取横向滚动条
+                var scrollL = $(window).scrollLeft();
+                //登入框宽度
+                var loginW = login.outerWidth(true);
+                //登入框高度
+                var loginH = login.outerHeight(true);
 
-    <form id="up" method="post" enctype="multipart/form-data" >
-    <input type="file" name="file" id="fileid" accept="image/*" style="display:none"/>
+                //定位到中间
+                var posW = bw / 2 - loginW / 2 + scrollL;
+                var posH = bh / 2 - loginH / 2 + scrollH;
+                var res = [posW, posH];
+                return res;
+            }
 
-  </form>
-    <br/>
-  </div>
-  <div class="fen">
+            $('#show').click(function () {
+                //出来遮罩层
+                var arr = getPos();
+                $('.mask').width(documentW).height(documentH).show();
+                //弹出登入框
+                login.show().css({'left': arr[0], 'top': arr[1]});
+                //点击关闭
+                $('.login h3 span').click(function () {
+                    login.hide();
+                    $('.mask').hide();
+                });
+            });
+            $(window).resize(function () {
+                if (login.is(':visible')) {
+                    var arr = getPos();
+                    login.animate({'left': arr[0], 'top': arr[1]}, 100).dequeue();
+                }
+            });
+            $(window).scroll(function () {
+                if (login.is(':visible')) {
+                    var arr = getPos();
+                    login.animate({'left': arr[0], 'top': arr[1]}, 100).dequeue();
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+<!-- 弹出登陆框按钮 -->
+<div>
+    <a th:if="${session.user==null}" href="javascript:;" id="show">登录</a>
+
+<!--    用户未登录div-->
+    <div th:if="${session.user==null}" style="width:280px;height: 500px;display: none" id="user_show">
+        <div class="box" onclick="showhide();">
+            <img class="showPic" alt="图片" width="100" height="100"/>
+        </div>
+        <span id="uname"></span>
+
+        <input type="button" id="load" value="修改头像" onclick="upload()"/>
+
+        <form id="up" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" id="fileid" accept="image/*" style="display:none"/>
+
+        </form>
+        <br/>
+    </div>
+
+
+<!--   用户登录后的div-->
+    <div th:if="${session.user!=null}" style="width:280px;height: 500px;" id="user_show">
+        <div class="box" onclick="showhide();">
+            <img class="showPic" th:src="${session.user.getPicture_url()}" alt="图片" width="100" height="100"/>
+        </div>
+        <span id="uname" th:text="${session.user.getUsername()}"></span>
+
+        <input type="button" id="load" value="修改头像" onclick="upload()"/>
+
+        <form id="up" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" id="fileid" accept="image/*" style="display:none"/>
+
+        </form>
+        <br/>
+    </div>
+</div>
+
+
+<div>
+    <!-- 弹出登陆框按钮 -->
+    <!--    <a href="javascript:;" id="show">登入</a>-->
+    <div class="login">
+        <h3>用户登入<span>关闭</span></h3>
+        <div class="cont">
+            <div class="box_login">
+
+
+                <form>
+
+                    <p class="input_box">
+                        账户： <input id="username" type="text" name="username" placeholder="请输入您的账户"/>
+                    </p>
+                    <p class="input_box">
+                        密码： <input id="password" type="password" name="password" placeholder="请输入您的密码"/>
+                    </p>
+                    <br/>
+                    <div id="error_box" align="center"><br/></div>
+                    <br/>
+                    <div>
+                        <button class="button" type="button" onclick="foLogin()">登录</button>
+                    </div>
+
+                    <h6 align="center"><a href="https://www.baidu.com">没有账号？注册</a></h6>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="mask"></div>
+</div>
+
+
+<div class="fen">
     <div id="box_page" th:fragment="fragmentSegment">
-    <div id="box_text">
-      <ul>
-        <li  th:each="post,userStat:${post.list}">
-          <div class="number">
-              <span>0</span>
-              <span>阅读</span>
-          </div>
-          <div class="title_box">
-      <a style="color: black" th:href="@{/findpost(id=${post.id})}" th:text="${post.title}" target="_blank"/>
-      <span class="badge-tag" th:text="${post.type}"></span>
-          </div>
-        </li>
-      </ul>
+        <div id="box_text">
+            <ul>
+                <li th:each="post,userStat:${post.list}">
+                    <div class="number">
+                        <span>0</span>
+                        <span>阅读</span>
+                    </div>
+                    <div class="title_box">
+                        <a style="color: black" th:href="@{/findpost(id=${post.id})}" th:text="${post.title}"
+                           target="_blank"/>
+                        <span class="badge-tag" th:text="${post.type}"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div style="float:right">
+            <span th:text="'总条数：'+${post.countnumber}+' 条 / 总页数：'+${post.countindex}+' 页'"></span>
+            <span th:text="当前第+${post.index}+页"></span>
+            <ul class="box_page">
+
+                <li th:if="${post.index!=1}"><span th:onclick="page(1)">首页</span></li>
+                <li th:if="${post.index>1}"><span th:onclick="page([[${post.index}-1]])">上页</span></li>
+
+                <!--        <li th:if="${post.index+1<=post.countindex}" th:text="${post.index+1}" th:onclick="page([[${post.index}+1]])" ></li>-->
+                <!--        <li th:if="${post.index+2<=post.countindex}" th:text="${post.index+2}" th:onclick="page([[${post.index}+2]])"></li>-->
+                <!--        <li th:if="${post.index+3<=post.countindex}" th:text="${post.index+3}" th:onclick="page([[${post.index}+3]])" ></li>-->
+                <li th:each="pageNum:${#numbers.sequence(0,post.countindex- 1)}">
+                    <span th:if="${pageNum<post.countindex}" th:onclick="page([[${pageNum+1}]])" th:text="${pageNum+1}">[(${pageNum+1})]</span>
+                </li>
+
+                <li th:if="${post.index<post.countindex}"><span th:onclick="page([[${post.index}+1]])">下页</span></li>
+            </ul>
+        </div>
     </div>
-    <div style="float:right" >
-    <span th:text="'总条数：'+${post.countnumber}+' 条 / 总页数：'+${post.countindex}+' 页'"></span>
-      <span th:text="当前第+${post.index}+页"></span>
-      <ul class="box_page">
-
-        <li th:if="${post.index!=1}"><span th:onclick="page(1)">首页</span></li>
-        <li th:if="${post.index>1}"><span th:onclick="page([[${post.index}-1]])"><</span></li>
-
-        <li th:if="${post.index+1<=post.countindex}" th:text="${post.index+1}" th:onclick="page([[${post.index}+1]])" ></li>
-        <li th:if="${post.index+2<=post.countindex}" th:text="${post.index+2}" th:onclick="page([[${post.index}+2]])"></li>
-        <li th:if="${post.index+3<=post.countindex}" th:text="${post.index+3}" th:onclick="page([[${post.index}+3]])" ></li>
+</div>
 
 
-        <li th:if="${post.index<post.countindex}"><span th:onclick="page([[${post.index}+1]])">></span></li>
-      </ul>
-  </div>
-    </div>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  </body>
-  </html>
+</body>
+</html>
