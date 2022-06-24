@@ -18,13 +18,15 @@
 
 
 <div class="box_pex">
-   <div class="box_remark" th:each="content,userStat:${contentList}"  >
+    <strong style="left: 1px;position: absolute;left: 4;top: 8px;">评论</strong>
+   <div class="box_list">
        <ul>
-           <li>
-               <img style="border-radius:50%; overflow:hidden;" width="50" height="50" th:src="${content.picture_url}">
-               <span class="badge-tag" th:text="${content.name}"></span>
-               <span class="badge-tag" th:text="${content.comment}"></span>
-
+           <li th:each="content,userStat:${contentList}">
+               <div class="box_user">
+               <img class="box_img"  style="border-radius:50%; overflow:hidden;" width="35" height="35" th:src="${content.picture_url}">
+               <a class="box_remark"  th:text="${content.name}"></a>
+               </div>
+               <span  th:text="${content.comment}"></span>
            </li>
        </ul>
    </div>

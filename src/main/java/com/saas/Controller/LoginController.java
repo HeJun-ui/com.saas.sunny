@@ -1,21 +1,13 @@
 package com.saas.Controller;
-import com.alibaba.fastjson.JSONObject;
 import com.saas.Ben.PageInfo;
 import com.saas.Ben.Post;
-import com.saas.Ben.Users;
 import com.saas.Service.imp.PostServiceImpl;
 import com.saas.Service.imp.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
@@ -33,7 +25,6 @@ public class LoginController {
         return "home";
 
     }
-
     /**
      * 分页接口实现
      * @param index

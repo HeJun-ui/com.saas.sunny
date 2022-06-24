@@ -153,22 +153,22 @@
                 </li>
             </ul>
         </div>
-        <div style="float:right">
+        <div  style="float:right">
             <span th:text="'总条数：'+${post.countnumber}+' 条 / 总页数：'+${post.countindex}+' 页'"></span>
-            <span th:text="当前第+${post.index}+页"></span>
+            当前第 <span class="page_index" th:text="${post.index}"></span>页
             <ul class="box_page">
 
-                <li th:if="${post.index!=1}"><span th:onclick="page(1)">首页</span></li>
-                <li th:if="${post.index>1}"><span th:onclick="page([[${post.index}-1]])">上页</span></li>
+                <li th:if="${post.index!=1}"><a th:onclick="page(1)">首页</a></li>
+                <li th:if="${post.index>1}"><a th:onclick="page([[${post.index}-1]])">上页</a></li>
 
                 <!--        <li th:if="${post.index+1<=post.countindex}" th:text="${post.index+1}" th:onclick="page([[${post.index}+1]])" ></li>-->
                 <!--        <li th:if="${post.index+2<=post.countindex}" th:text="${post.index+2}" th:onclick="page([[${post.index}+2]])"></li>-->
                 <!--        <li th:if="${post.index+3<=post.countindex}" th:text="${post.index+3}" th:onclick="page([[${post.index}+3]])" ></li>-->
                 <li th:each="pageNum:${#numbers.sequence(0,post.countindex- 1)}">
-                    <span th:if="${pageNum<post.countindex}" th:onclick="page([[${pageNum+1}]])" th:text="${pageNum+1}">[(${pageNum+1})]</span>
+                    <a th:if="${pageNum<post.countindex}" th:onclick="page([[${pageNum+1}]])" th:text="${pageNum+1}">[(${pageNum+1})]</a>
                 </li>
 
-                <li th:if="${post.index<post.countindex}"><span th:onclick="page([[${post.index}+1]])">下页</span></li>
+                <li th:if="${post.index<post.countindex}"><a th:onclick="page([[${post.index}+1]])">下页</a></li>
             </ul>
         </div>
     </div>

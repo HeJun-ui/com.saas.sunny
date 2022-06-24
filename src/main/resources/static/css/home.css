@@ -45,6 +45,7 @@ a{
     background-color: rgba(0,150,94,.1);
     margin: 0.25rem!important;
 
+
 }
 
 #load {
@@ -144,7 +145,6 @@ ul
     --bs-body-line-height: 1.5;
     --bs-body-color: #212529;
     --bs-body-bg: #fff;
-    font-family: var(--bs-body-font-family);
     font-size: var(--bs-body-font-size);
     font-weight: var(--bs-body-font-weight);
     line-height: var(--bs-body-line-height);
@@ -185,6 +185,7 @@ ul
     list-style-type: none;
 
 
+
 }
 .box_page li
 {
@@ -200,6 +201,13 @@ ul
 
     color: #0d6efd;
     text-decoration: none;
+
+}
+.box_page a
+{
+   font-size: 14px;
+
+
 
 }
 

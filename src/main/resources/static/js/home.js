@@ -53,6 +53,14 @@ function showhide() {
 }
 
 function page(a) {
+
+   if($(".page_index").text()==a)
+   {
+       alert("当前已所第"+a+"页")
+       return;
+   }
+
+
     $.ajax({
         url: "/paging",
         data: "index=" + a,

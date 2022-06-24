@@ -33,10 +33,8 @@ function foLogin() {
         success: function (res) {
           if(res.message=="ok")
           {
-              alert("登录成功")
-           $(".showPic").attr("src",res.url)
-              alert("修改头像样式")
-              $("#uname").attr("text",res.name)
+           $(".showPic").attr("src",res.url);
+              $("#uname").html(res.name);
               $("#show").hide();
               $(".login").hide();
               $('.mask').hide();
