@@ -18,6 +18,7 @@ public class PostController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public JSONObject SavePost(@RequestBody Post post) {
+
         return postService.SavePost(post);
     }
 

@@ -19,7 +19,7 @@ function uploadfile() {
     formData = new FormData(form);
     formData.append("username", uname)
     $.ajax({
-        url: "http://localhost:8080/user/upload",
+        url: "/user/upload",
         type: "POST",
         data: formData,
         processData: false,

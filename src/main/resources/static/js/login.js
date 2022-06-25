@@ -27,7 +27,7 @@ function foLogin() {
     };
 
     $.ajax({
-        url: "http://localhost:8080/user/login",
+        url: "/user/login",
         type: "POST",
         data: formData,
         success: function (res) {
